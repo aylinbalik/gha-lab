@@ -9,5 +9,9 @@ jobs:
       - uses: actions/checkout@v2
       - run: python hello.py
       - run: pip install pytest
-      - run: python -m pytest -q
-
+      - run: python -m pytest -q --junitxml=report.xml
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-report
+          path: report.xml
